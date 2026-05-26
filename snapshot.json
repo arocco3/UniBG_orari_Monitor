@@ -1,5 +1,54 @@
 {
-  "events": [],
-  "fingerprint": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "last_updated": "2026-05-26T12:53:33.833029"
+  "events": [
+    {
+      "raw": "🔹 COMPUTER SECURITY | 25-05-2026 08:30 - 11:30 | B101 [Edificio B - Dalmine]",
+      "html_hash": "4b595e49a6d17041b42c1240aca49c69"
+    },
+    {
+      "raw": "🔹 GESTIONE AZIENDALE | 25-05-2026 10:30 - 13:30 | D002 [Edificio D - Dalmine]",
+      "html_hash": "60a9c55487584692fdfaf34509b96db8"
+    },
+    {
+      "raw": "🔹 INTELLIGENZA ARTIFICIALE | 25-05-2026 16:00 - 18:00 | A201 [Edificio A - Dalmine]",
+      "html_hash": "9e6c48a7137e0b9d3717c1ed73bec82a"
+    },
+    {
+      "raw": "🔹 GESTIONE AZIENDALE | 26-05-2026 08:30 - 10:30 | A002 [Edificio A - Dalmine]",
+      "html_hash": "9910e56de751ff255342c379311917f8"
+    },
+    {
+      "raw": "❌ [ANNULLATA] COMPUTER SECURITY | 26-05-2026 11:30 - 13:30 | Laboratorio Salesi [Edificio A - Dalmine]",
+      "html_hash": "335c309c126f0a48379d918b1833f9a7"
+    },
+    {
+      "raw": "🔹 OPTIMIZATION | 26-05-2026 16:00 - 19:00 | B103 [Edificio B - Dalmine]",
+      "html_hash": "5c3b0e5c6af3f1b159bd671cb1f04880"
+    },
+    {
+      "raw": "🔹 STATISTICAL LEARNING | 27-05-2026 10:30 - 12:30 | B-106 [Edificio B - Dalmine]",
+      "html_hash": "da0e3f6b1cbe76294654c3f853dead71"
+    },
+    {
+      "raw": "🔹 GESTIONE AZIENDALE | 27-05-2026 10:30 - 13:30 | D002 [Edificio D - Dalmine]",
+      "html_hash": "03bea67418c2f07076f6d6b301b4cc2a"
+    },
+    {
+      "raw": "🔹 INTELLIGENZA ARTIFICIALE | 28-05-2026 10:30 - 12:30 | B104 [Edificio B - Dalmine]",
+      "html_hash": "235c982542ca0502f9ebc07b3273f6cc"
+    },
+    {
+      "raw": "🔹 TEORIA DELL'INFORMAZIONE E DELLA TRASMISSIONE (TIT) | 28-05-2026 14:00 - 18:00 | Lab. Galvani - piano1 [Laboratori - Dalmine]",
+      "html_hash": "85eed26e53d7125338cbdd99608d2c9b"
+    },
+    {
+      "raw": "🔹 STATISTICAL LEARNING | 29-05-2026 14:00 - 16:00 | B101 [Edificio B - Dalmine]",
+      "html_hash": "c6af238b6ec1e4f912778946ef2eade0"
+    },
+    {
+      "raw": "🔹 COMPUTER SECURITY | 29-05-2026 17:00 - 19:00 | A001 [Edificio A - Dalmine]",
+      "html_hash": "96e073b96ccacb49af1e5bb1a9226f07"
+    }
+  ],
+  "fingerprint": "9c8998ce002663c06fefffd2f92cc97f79307b85c7ee7c5183d5158b9b008e6d",
+  "last_updated": "2026-05-26T13:48:54.506710"
 }
