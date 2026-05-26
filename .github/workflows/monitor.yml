@@ -3,7 +3,7 @@ name: Monitor Orari UniBG
 on:
   schedule:
     # Ogni ora dalle 7:00 alle 22:00 (UTC+2 = CEST), dal lunedì al sabato
-    - cron: "0 5-20 * * 1-6"
+    - cron: "0 7-20 * * 1-6"
   workflow_dispatch:
 
 jobs:
@@ -23,7 +23,6 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        # Rimossa la dipendenza beautifulsoup4, basta requests
         run: pip install requests
 
       - name: Run monitor

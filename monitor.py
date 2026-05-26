@@ -25,7 +25,6 @@ CORSI_INTERESSATI = [
     "INTELLIGENZA ARTIFICIALE",
     "RETI DI TELECOMUNICAZIONI",
     "TEORIA DELL'INFORMAZIONE E DELLA TRASMISSIONE (TIT)",
-    "COMPUTER SECURITY" # Aggiunto basandomi sul JSON che avevi inviato prima
 ]
 
 # Endpoint API diretto
@@ -42,7 +41,7 @@ PAYLOAD = {
     "corso": "38-270",
     "anno2[]": "PDS0-2012|1",
     "visualizzazione_orario": "cal",
-    "date": "26-05-2026", # ATTENZIONE: Questo parametro potrebbe definire la settimana specifica.
+    "date": datetime.now().strftime("%d-%m-%Y"), # ATTENZIONE: Questo parametro potrebbe definire la settimana specifica.
     "periodo_didattico": "",
     "_lang": "it",
     "list": "",
