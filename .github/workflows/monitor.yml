@@ -3,16 +3,15 @@ name: Monitor Orari UniBG
 on:
   schedule:
     # Ogni ora dalle 7:00 alle 22:00 (UTC+2 = CEST), dal lunedì al sabato
-    # GitHub Actions usa UTC, quindi sottraiamo 2 ore
-    - cron: "0 5-20 * * 1-6"   # 07:00–22:00 CEST, lun–sab
-  workflow_dispatch:             # permette anche avvio manuale dal browser
+    - cron: "0 5-20 * * 1-6"
+  workflow_dispatch:
 
 jobs:
   check-schedule:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write   # necessario per committare lo snapshot
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -24,7 +23,8 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install requests beautifulsoup4
+        # Rimossa la dipendenza beautifulsoup4, basta requests
+        run: pip install requests
 
       - name: Run monitor
         env:

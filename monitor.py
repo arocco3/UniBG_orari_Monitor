@@ -8,13 +8,12 @@ import requests
 import json
 import os
 import hashlib
-from datetime import datetime, timedelta
-from bs4 import BeautifulSoup
+from datetime import datetime
 
 # ── Configurazione ──────────────────────────────────────────────────────────
 
-TELEGRAM_TOKEN = os.environ["TELEGRAM_TOKEN"]
-TELEGRAM_CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
+TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN", "LOCAL_TEST_TOKEN")
+TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "LOCAL_TEST_ID")
 
 SNAPSHOT_FILE = "snapshot.json"
 
@@ -26,11 +25,14 @@ CORSI_INTERESSATI = [
     "INTELLIGENZA ARTIFICIALE",
     "RETI DI TELECOMUNICAZIONI",
     "TEORIA DELL'INFORMAZIONE E DELLA TRASMISSIONE (TIT)",
+    "COMPUTER SECURITY" # Aggiunto basandomi sul JSON che avevi inviato prima
 ]
 
-# URL base del portale con i parametri fissi del tuo corso
-BASE_URL = "https://logistica.unibg.it/PortaleStudenti/index.php"
-PARAMS = {
+# Endpoint API diretto
+BASE_URL = "https://logistica.unibg.it/PortaleStudenti/grid_call.php"
+
+# Payload estratto dal traffico di rete (Form Data)
+PAYLOAD = {
     "view": "easycourse",
     "form-type": "corso",
     "include": "corso",
@@ -39,9 +41,20 @@ PARAMS = {
     "scuola": "ScuoladiIngegneria",
     "corso": "38-270",
     "anno2[]": "PDS0-2012|1",
-    "visualizzazione_orario": "list",   # lista = più facile da parsare
+    "visualizzazione_orario": "cal",
+    "date": "26-05-2026", # ATTENZIONE: Questo parametro potrebbe definire la settimana specifica.
+    "periodo_didattico": "",
     "_lang": "it",
-    "all_events": "1",
+    "list": "",
+    "week_grid_type": "-1",
+    "ar_codes_": "",
+    "ar_select_": "",
+    "col_cells": "0",
+    "empty_box": "0",
+    "only_grid": "0",
+    "highlighted_date": "0",
+    "all_events": "0",
+    "faculty_group": "0"
 }
 
 HEADERS = {
@@ -49,53 +62,53 @@ HEADERS = {
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
         "AppleWebKit/537.36 (KHTML, like Gecko) "
         "Chrome/124.0 Safari/537.36"
-    )
+    ),
+    "X-Requested-With": "XMLHttpRequest" # Importante per simulare la chiamata AJAX
 }
 
-# ── Scraping ────────────────────────────────────────────────────────────────
+# ── Interrogazione API ──────────────────────────────────────────────────────
 
 def fetch_schedule() -> list[dict]:
-    """Scarica la pagina orari e restituisce una lista di eventi."""
-    resp = requests.get(BASE_URL, params=PARAMS, headers=HEADERS, timeout=30)
+    """Interroga l'API JSON e restituisce una lista di eventi normalizzata."""
+    # Usiamo POST invece di GET, passando il PAYLOAD in formato form-urlencoded (data=)
+    resp = requests.post(BASE_URL, data=PAYLOAD, headers=HEADERS, timeout=30)
     resp.raise_for_status()
-    soup = BeautifulSoup(resp.text, "html.parser")
+    
+    try:
+        data = resp.json()
+    except json.JSONDecodeError:
+        raise ValueError("L'API non ha restituito un JSON valido. Controlla il payload.")
 
     events = []
+    
+    # Se 'celle' non esiste o è vuoto, restituisce una lista vuota
+    celle = data.get("celle", [])
 
-    # Il portale EasyCourse usa tag <li class="event-item"> oppure tabelle.
-    # Proviamo entrambe le strutture comuni.
-
-    # Struttura 1: div/li con classe "evento" o "event"
-    for el in soup.find_all(["li", "div"], class_=lambda c: c and "event" in c.lower()):
-        text = el.get_text(" ", strip=True)
-        if _corso_interessato(text):
-            events.append({"raw": text, "html_hash": hashlib.md5(str(el).encode()).hexdigest()})
-
-    # Struttura 2: righe di tabella (fallback)
-    if not events:
-        for row in soup.find_all("tr"):
-            text = row.get_text(" ", strip=True)
-            if _corso_interessato(text) and len(text) > 20:
-                events.append({"raw": text, "html_hash": hashlib.md5(str(row).encode()).hexdigest()})
-
-    # Struttura 3: testo libero nella pagina (ultimo fallback - hash globale)
-    if not events:
-        page_text = soup.get_text(" ", strip=True)
-        relevant_lines = [
-            line.strip()
-            for line in page_text.splitlines()
-            if _corso_interessato(line) and len(line.strip()) > 15
-        ]
-        for line in relevant_lines:
-            events.append({"raw": line, "html_hash": hashlib.md5(line.encode()).hexdigest()})
+    for cella in celle:
+        nome_corso = cella.get("nome_insegnamento", "Sconosciuto")
+        
+        if _corso_interessato(nome_corso):
+            data_lez = cella.get("data", "")
+            orario = cella.get("orario", "")
+            aula = cella.get("aula", "Non assegnata")
+            annullato = cella.get("Annullato", "0")
+            
+            # Formattiamo il testo che verrà mostrato su Telegram
+            stato_icona = "❌ [ANNULLATA]" if annullato == "1" else "🔹"
+            raw_text = f"{stato_icona} {nome_corso} | {data_lez} {orario} | {aula}"
+            
+            # Creiamo l'hash solo sui dati strutturati essenziali
+            core_data = f"{nome_corso}|{data_lez}|{orario}|{aula}|{annullato}"
+            event_hash = hashlib.md5(core_data.encode()).hexdigest()
+            
+            # Manteniamo le stesse chiavi del tuo vecchio script per non rompere il resto del codice
+            events.append({"raw": raw_text, "html_hash": event_hash})
 
     return events
-
 
 def _corso_interessato(text: str) -> bool:
     t = text.upper()
     return any(corso.upper() in t for corso in CORSI_INTERESSATI)
-
 
 # ── Confronto snapshot ──────────────────────────────────────────────────────
 
@@ -105,16 +118,13 @@ def load_snapshot() -> dict:
             return json.load(f)
     return {}
 
-
 def save_snapshot(data: dict):
     with open(SNAPSHOT_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-
 def compute_fingerprint(events: list[dict]) -> str:
     combined = "|".join(sorted(e["html_hash"] for e in events))
     return hashlib.sha256(combined.encode()).hexdigest()
-
 
 # ── Telegram ────────────────────────────────────────────────────────────────
 
@@ -128,7 +138,6 @@ def send_telegram(message: str):
     r = requests.post(url, json=payload, timeout=15)
     r.raise_for_status()
 
-
 def build_diff_message(old_events: list, new_events: list) -> str:
     old_hashes = {e["html_hash"] for e in old_events}
     new_hashes = {e["html_hash"] for e in new_events}
@@ -139,34 +148,33 @@ def build_diff_message(old_events: list, new_events: list) -> str:
     lines = ["🔔 <b>Cambiamento orari rilevato!</b>", f"📅 {datetime.now().strftime('%d/%m/%Y %H:%M')}", ""]
 
     if added:
-        lines.append("✅ <b>Nuovi/modificati:</b>")
-        for e in added[:10]:  # max 10 per non superare il limite Telegram
-            lines.append(f"  • {e['raw'][:200]}")
+        lines.append("✅ <b>Nuovi inserimenti o Modifiche:</b>")
+        for e in added[:10]:
+            lines.append(f"  • {e['raw']}")
 
     if removed:
         lines.append("")
-        lines.append("❌ <b>Rimossi/modificati:</b>")
+        lines.append("❌ <b>Lezioni rimosse o Sostituite:</b>")
         for e in removed[:10]:
-            lines.append(f"  • {e['raw'][:200]}")
+            lines.append(f"  • {e['raw']}")
 
     lines.append("")
-    lines.append("👉 Controlla: logistica.unibg.it")
+    lines.append("👉 Controlla il portale studenti per i dettagli.")
     return "\n".join(lines)
-
 
 # ── Main ────────────────────────────────────────────────────────────────────
 
 def main():
-    print(f"[{datetime.now().isoformat()}] Avvio controllo orari...")
+    print(f"[{datetime.now().isoformat()}] Avvio controllo orari via API...")
 
     try:
         events = fetch_schedule()
     except Exception as e:
         print(f"Errore durante il fetch: {e}")
-        send_telegram(f"⚠️ Errore monitor orari UniBG:\n<code>{e}</code>")
+        send_telegram(f"⚠️ Errore API UniBG:\n<code>{e}</code>")
         raise
 
-    print(f"  → {len(events)} eventi trovati per i corsi selezionati")
+    print(f"  → {len(events)} lezioni trovate per i corsi selezionati.")
 
     snapshot = load_snapshot()
     old_events = snapshot.get("events", [])
@@ -176,19 +184,21 @@ def main():
 
     if new_fingerprint != old_fingerprint:
         print("  → CAMBIAMENTO RILEVATO! Invio notifica Telegram...")
-        if old_fingerprint:  # non notificare al primo avvio
+        if old_fingerprint:
             msg = build_diff_message(old_events, events)
             send_telegram(msg)
         else:
-            print("  → Primo avvio: salvo snapshot iniziale senza notifica.")
+            print("  → Primo avvio con il nuovo sistema: salvo snapshot iniziale senza notificare.")
 
-        save_snapshot({"events": events, "fingerprint": new_fingerprint,
-                       "last_updated": datetime.now().isoformat()})
+        save_snapshot({
+            "events": events, 
+            "fingerprint": new_fingerprint,
+            "last_updated": datetime.now().isoformat()
+        })
     else:
-        print("  → Nessun cambiamento.")
+        print("  → Nessun cambiamento rilevato nello schedule.")
 
-    print("  → Done.")
-
+    print("  → Esecuzione terminata.")
 
 if __name__ == "__main__":
     main()
