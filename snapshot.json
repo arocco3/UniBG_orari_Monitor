@@ -1,10 +1,6 @@
 {
   "events": [
     {
-      "raw": "🔹 COMPUTER SECURITY | 25-05-2026 08:30 - 11:30 | B101 [Edificio B - Dalmine]",
-      "html_hash": "4b595e49a6d17041b42c1240aca49c69"
-    },
-    {
       "raw": "🔹 GESTIONE AZIENDALE | 25-05-2026 10:30 - 13:30 | D002 [Edificio D - Dalmine]",
       "html_hash": "60a9c55487584692fdfaf34509b96db8"
     },
@@ -15,10 +11,6 @@
     {
       "raw": "🔹 GESTIONE AZIENDALE | 26-05-2026 08:30 - 10:30 | A002 [Edificio A - Dalmine]",
       "html_hash": "9910e56de751ff255342c379311917f8"
-    },
-    {
-      "raw": "❌ [ANNULLATA] COMPUTER SECURITY | 26-05-2026 11:30 - 13:30 | Laboratorio Salesi [Edificio A - Dalmine]",
-      "html_hash": "335c309c126f0a48379d918b1833f9a7"
     },
     {
       "raw": "🔹 OPTIMIZATION | 26-05-2026 16:00 - 19:00 | B103 [Edificio B - Dalmine]",
@@ -43,12 +35,8 @@
     {
       "raw": "🔹 STATISTICAL LEARNING | 29-05-2026 14:00 - 16:00 | B101 [Edificio B - Dalmine]",
       "html_hash": "c6af238b6ec1e4f912778946ef2eade0"
-    },
-    {
-      "raw": "🔹 COMPUTER SECURITY | 29-05-2026 17:00 - 19:00 | A001 [Edificio A - Dalmine]",
-      "html_hash": "96e073b96ccacb49af1e5bb1a9226f07"
     }
   ],
-  "fingerprint": "9c8998ce002663c06fefffd2f92cc97f79307b85c7ee7c5183d5158b9b008e6d",
-  "last_updated": "2026-05-26T13:48:54.506710"
+  "fingerprint": "c3f16684d265feb65ed09cee5c0dd5ce49be42aa450fed4c783a93964028ed86",
+  "last_updated": "2026-05-26T14:22:37.657070"
 }
