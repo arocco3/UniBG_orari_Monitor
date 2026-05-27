@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orari · Ingegneria Informatica Magistrale</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #f8f9fa;
+    --surface:   #ffffff;
+    --border:    #e5e7eb;
+    --text:      #111827;
+    --muted:     #6b7280;
+    --radius:    10px;
+    --annullato: #fee2e2;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:      #0f1117;
+      --surface: #1c1f26;
+      --border:  #2d3139;
+      --text:    #f3f4f6;
+      --muted:   #9ca3af;
+      --annullato: #3b1515;
+    }
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0 0 3rem;
+  }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  header h1 { font-size: 1rem; font-weight: 600; }
+  header .sub { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+  #last-update { font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
+
+  .tabs {
+    display: flex;
+    gap: 0;
+    padding: 1rem 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .tab-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: none;
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color .15s, border-color .15s;
+  }
+  .tab-btn.active { color: var(--text); border-bottom-color: #4F46E5; }
+
+  .tab-panel { display: none; padding: 1.5rem; }
+  .tab-panel.active { display: block; }
+
+  /* ── WEEK NAV ── */
+  .week-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.25rem;
+  }
+  .week-nav button {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.4rem 0.75rem;
+    font-size: 0.82rem;
+    cursor: pointer;
+    color: var(--text);
+  }
+  .week-nav button:hover { background: var(--bg); }
+  #week-label { font-size: 0.88rem; font-weight: 500; }
+
+  /* ── WEEK GRID ── */
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .day-col { display: flex; flex-direction: column; gap: 6px; }
+
+  .day-header {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .day-header.today { color: #4F46E5; }
+
+  .lesson-card {
+    border-radius: 8px;
+    padding: 8px 10px;
+    border-left: 3px solid;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    cursor: default;
+  }
+  .lesson-card.annullata { background: var(--annullato); opacity: .7; }
+
+  .lesson-nome {
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  .lesson-ora  { font-size: 0.7rem; color: var(--muted); }
+  .lesson-aula { font-size: 0.68rem; color: var(--muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  .badge-ann {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    background: #fca5a5;
+    color: #7f1d1d;
+    border-radius: 4px;
+    padding: 1px 5px;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+  }
+
+  .empty-day { font-size: 0.72rem; color: var(--muted); padding-top: 4px; }
+
+  /* ── LIST VIEW ── */
+  .list-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .list-controls select {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.4rem 0.65rem;
+    font-size: 0.82rem;
+    color: var(--text);
+    cursor: pointer;
+  }
+  .list-controls label { font-size: 0.82rem; color: var(--muted); }
+
+  .list-group { margin-bottom: 1.5rem; }
+  .list-group-header {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 8px;
+  }
+
+  .list-item {
+    display: grid;
+    grid-template-columns: 4px 1fr auto;
+    gap: 0 12px;
+    align-items: start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 14px 10px 0;
+    margin-bottom: 6px;
+    overflow: hidden;
+  }
+  .list-item.annullata { opacity: .6; background: var(--annullato); }
+
+  .list-stripe { width: 4px; align-self: stretch; border-radius: 4px 0 0 4px; }
+  .list-body { padding-left: 0; }
+  .list-nome { font-size: 0.88rem; font-weight: 600; }
+  .list-meta { font-size: 0.78rem; color: var(--muted); margin-top: 3px; }
+  .list-time { font-size: 0.82rem; font-weight: 500; text-align: right; white-space: nowrap; }
+
+  /* ── EMPTY ── */
+  .empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .week-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tabs { padding: 0.75rem 1rem 0; }
+    .tab-panel { padding: 1rem; }
+  }
+  @media (max-width: 420px) {
+    .week-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Orari lezioni</h1>
+    <div class="sub">Ingegneria Informatica Magistrale · Anno 1 · UniBG</div>
+  </div>
+  <div id="last-update">—</div>
+</header>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('week')">Settimana</button>
+  <button class="tab-btn"        onclick="switchTab('list')">Prossime lezioni</button>
+</div>
+
+<div id="tab-week" class="tab-panel active">
+  <div class="week-nav">
+    <button onclick="shiftWeek(-1)">&#8592; Prec</button>
+    <span id="week-label"></span>
+    <button onclick="shiftWeek(1)">Succ &#8594;</button>
+    <button onclick="goToday()" style="margin-left:auto">Oggi</button>
+  </div>
+  <div class="week-grid" id="week-grid"></div>
+</div>
+
+<div id="tab-list" class="tab-panel">
+  <div class="list-controls">
+    <label for="filter-corso">Corso:</label>
+    <select id="filter-corso" onchange="renderList()">
+      <option value="">Tutti</option>
+    </select>
+  </div>
+  <div id="list-container"></div>
+</div>
+
+<script>
+const GIORNI = ["lunedì","martedì","mercoledì","giovedì","venerdì","sabato"];
+const GIORNI_SHORT = ["Lun","Mar","Mer","Gio","Ven","Sab"];
+const MESI = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
+
+let allLezioni = [];
+let weekOffset = 0;
+
+function switchTab(name) {
+  document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  document.getElementById("tab-" + name).classList.add("active");
+  event.target.classList.add("active");
+}
+
+function parseDate(str) {
+  const [d, m, y] = str.split("-").map(Number);
+  return new Date(y, m - 1, d);
+}
+
+function formatDateKey(date) {
+  const d = String(date.getDate()).padStart(2, "0");
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  return `${d}-${m}-${date.getFullYear()}`;
+}
+
+function getMondayOf(date) {
+  const d = new Date(date);
+  const day = d.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  d.setDate(d.getDate() + diff);
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
+
+function shiftWeek(delta) { weekOffset += delta; renderWeek(); }
+function goToday() { weekOffset = 0; renderWeek(); }
+
+function renderWeek() {
+  const monday = getMondayOf(new Date());
+  monday.setDate(monday.getDate() + weekOffset * 7);
+
+  const days = Array.from({length: 6}, (_, i) => {
+    const d = new Date(monday);
+    d.setDate(monday.getDate() + i);
+    return d;
+  });
+
+  const from = days[0], to = days[5];
+  document.getElementById("week-label").textContent =
+    `${from.getDate()} ${MESI[from.getMonth()]} – ${to.getDate()} ${MESI[to.getMonth()]} ${to.getFullYear()}`;
+
+  const todayKey = formatDateKey(new Date());
+  const byDay = {};
+  days.forEach(d => { byDay[formatDateKey(d)] = []; });
+  allLezioni.forEach(l => { if (byDay[l.data] !== undefined) byDay[l.data].push(l); });
+
+  const grid = document.getElementById("week-grid");
+  grid.innerHTML = "";
+
+  days.forEach((day, i) => {
+    const key = formatDateKey(day);
+    const col = document.createElement("div");
+    col.className = "day-col";
+
+    const hdr = document.createElement("div");
+    hdr.className = "day-header" + (key === todayKey ? " today" : "");
+    hdr.textContent = `${GIORNI_SHORT[i]} ${day.getDate()}`;
+    col.appendChild(hdr);
+
+    const lessons = byDay[key] || [];
+    if (lessons.length === 0) {
+      const em = document.createElement("div");
+      em.className = "empty-day";
+      em.textContent = "—";
+      col.appendChild(em);
+    } else {
+      lessons.forEach(l => {
+        const card = document.createElement("div");
+        card.className = "lesson-card" + (l.annullato ? " annullata" : "");
+        card.style.borderLeftColor = l.colore;
+
+        let html = "";
+        if (l.annullato) html += `<div class="badge-ann">Annullata</div>`;
+        html += `<div class="lesson-nome">${l.nome}</div>`;
+        html += `<div class="lesson-ora">${l.ora_inizio} – ${l.ora_fine}</div>`;
+        if (l.aula) html += `<div class="lesson-aula">${l.aula.split("[")[0].trim()}</div>`;
+        card.innerHTML = html;
+        col.appendChild(card);
+      });
+    }
+    grid.appendChild(col);
+  });
+}
+
+function populateFilter() {
+  const sel = document.getElementById("filter-corso");
+  const nomi = [...new Set(allLezioni.map(l => l.nome))].sort();
+  nomi.forEach(n => {
+    const opt = document.createElement("option");
+    opt.value = n;
+    opt.textContent = n.length > 40 ? n.slice(0, 38) + "…" : n;
+    sel.appendChild(opt);
+  });
+}
+
+function renderList() {
+  const filtro = document.getElementById("filter-corso").value;
+  const oggi = new Date(); oggi.setHours(0, 0, 0, 0);
+
+  const lezioni = allLezioni.filter(l => {
+    const d = parseDate(l.data);
+    return d >= oggi && (!filtro || l.nome === filtro);
+  });
+
+  const container = document.getElementById("list-container");
+  if (lezioni.length === 0) {
+    container.innerHTML = `<div class="empty-state">Nessuna lezione trovata.</div>`;
+    return;
+  }
+
+  const groups = {};
+  lezioni.forEach(l => {
+    const key = l.data;
+    if (!groups[key]) groups[key] = { label: l.giorno, items: [] };
+    groups[key].items.push(l);
+  });
+
+  container.innerHTML = "";
+  Object.entries(groups).forEach(([, g]) => {
+    const grp = document.createElement("div");
+    grp.className = "list-group";
+
+    const hdr = document.createElement("div");
+    hdr.className = "list-group-header";
+    hdr.textContent = g.label;
+    grp.appendChild(hdr);
+
+    g.items.forEach(l => {
+      const item = document.createElement("div");
+      item.className = "list-item" + (l.annullato ? " annullata" : "");
+
+      const stripe = document.createElement("div");
+      stripe.className = "list-stripe";
+      stripe.style.background = l.colore;
+
+      const body = document.createElement("div");
+      body.className = "list-body";
+      let annTag = l.annullato ? `<span class="badge-ann">Annullata</span> ` : "";
+      body.innerHTML = `<div class="list-nome">${annTag}${l.nome}</div>
+        <div class="list-meta">${l.aula || ""} ${l.docente ? "· " + l.docente : ""}</div>`;
+
+      const time = document.createElement("div");
+      time.className = "list-time";
+      time.innerHTML = `${l.ora_inizio}<br><span style="color:var(--muted);font-size:.72rem">${l.ora_fine}</span>`;
+
+      item.appendChild(stripe);
+      item.appendChild(body);
+      item.appendChild(time);
+      grp.appendChild(item);
+    });
+
+    container.appendChild(grp);
+  });
+}
+
+async function init() {
+  try {
+    const res = await fetch("schedule.json?_=" + Date.now());
+    const data = await res.json();
+    allLezioni = data.lezioni || [];
+
+    const upd = new Date(data.aggiornato);
+    document.getElementById("last-update").textContent =
+      "Agg. " + upd.toLocaleString("it-IT", {day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"});
+
+    populateFilter();
+    renderWeek();
+    renderList();
+  } catch (e) {
+    document.getElementById("week-grid").innerHTML =
+      `<div class="empty-state" style="grid-column:1/-1">Impossibile caricare schedule.json.<br><small>${e}</small></div>`;
+  }
+}
+
+init();
+</script>
+</body>
+</html>
