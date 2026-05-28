@@ -49,30 +49,32 @@ HEADERS = {
 }
 
 def fetch_weeks(num_weeks: int = 8) -> list[dict]:
-    """Scarica num_weeks settimane di orari e restituisce la lista grezza di celle."""
     all_cells = []
     today = datetime.now()
-    # Vai al lunedì della settimana corrente
     monday = today - timedelta(days=today.weekday())
 
     for w in range(num_weeks):
         date_str = (monday + timedelta(weeks=w)).strftime("%d-%m-%Y")
         payload = {
-            "form-type":            "corso",
-            "anno":                 "2025",
-            "scuola":               "ScuoladiIngegneria",
-            "corso":                "38-270",
-            "anno2[]":              "PDS0-2012|1",
+            "form-type":              "corso",
+            "anno":                   "2025",
+            "scuola":                 "ScuoladiIngegneria",
+            "corso":                  "38-270",
+            "anno2[]":                "PDS0-2012|1",
             "visualizzazione_orario": "cal",
-            "date":                 date_str,
-            "_lang":                "it",
-            "all_events":           "1",
+            "date":                   date_str,
+            "_lang":                  "it",
+            "all_events":             "1",
         }
         try:
             r = requests.post(GRID_URL, data=payload, headers=HEADERS, timeout=30)
             r.raise_for_status()
+            print(f"  → settimana {date_str}: status {r.status_code}, risposta {r.text[:300]}")
             data = r.json()
             celle = data.get("celle", [])
+            print(f"     celle totali: {len(celle)}")
+            if celle:
+                print(f"     primo corso: {celle[0].get('nome_insegnamento', 'N/A')}")
             all_cells.extend(celle)
         except Exception as e:
             print(f"  Errore settimana {date_str}: {e}")
