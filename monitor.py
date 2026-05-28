@@ -82,12 +82,8 @@ def fetch_weeks(num_weeks: int = 8) -> list[dict]:
         try:
             r = requests.post(GRID_URL, data=payload, headers=HEADERS, timeout=30)
             r.raise_for_status()
-            print(f"  → settimana {date_str}: status {r.status_code}, risposta {r.text[:300]}")
             data = r.json()
             celle = data.get("celle", [])
-            print(f"     celle totali: {len(celle)}")
-            if celle:
-                print(f"     primo corso: {celle[0].get('nome_insegnamento', 'N/A')}")
             all_cells.extend(celle)
         except Exception as e:
             print(f"  Errore settimana {date_str}: {e}")
