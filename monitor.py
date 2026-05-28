@@ -56,15 +56,28 @@ def fetch_weeks(num_weeks: int = 8) -> list[dict]:
     for w in range(num_weeks):
         date_str = (monday + timedelta(weeks=w)).strftime("%d-%m-%Y")
         payload = {
+            "view":                   "easycourse",
             "form-type":              "corso",
+            "include":                "corso",
+            "txtcurr":                "1 - PERCORSO COMUNE",
             "anno":                   "2025",
             "scuola":                 "ScuoladiIngegneria",
             "corso":                  "38-270",
             "anno2[]":                "PDS0-2012|1",
             "visualizzazione_orario": "cal",
             "date":                   date_str,
+            "periodo_didattico":      "",
             "_lang":                  "it",
-            "all_events":             "1",
+            "list":                   "",
+            "week_grid_type":         "-1",
+            "ar_codes_":              "",
+            "ar_select_":             "",
+            "col_cells":              "0",
+            "empty_box":              "0",
+            "only_grid":              "0",
+            "highlighted_date":       "0",
+            "all_events":             "0",
+            "faculty_group":          "0",
         }
         try:
             r = requests.post(GRID_URL, data=payload, headers=HEADERS, timeout=30)
