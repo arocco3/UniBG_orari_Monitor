@@ -42,10 +42,3 @@ jobs:
           git add snapshot.json schedule.json
           git diff --cached --quiet || git commit -m "chore: aggiorna orari [skip ci]"
           git push
-
-      - name: Deploy su GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
-          exclude_assets: '.github,monitor.py,snapshot.json,requirements.txt,README.md'
