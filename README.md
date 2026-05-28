@@ -3,6 +3,7 @@
 
 Monitora automaticamente gli orari delle lezioni e ti avvisa su **Telegram** quando cambiano.
 
+This project is also live at https://arocco3.github.io/UniBG_orari_Monitor/
 ---
 
 ## Come funziona
