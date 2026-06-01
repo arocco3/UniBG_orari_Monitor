@@ -1,50 +1,34 @@
 {
   "events": [
     {
-      "raw": "🔹 GESTIONE AZIENDALE | 25-05-2026 10:30 - 13:30 | D002 [Edificio D - Dalmine]",
-      "html_hash": "60a9c55487584692fdfaf34509b96db8"
+      "raw": "🔹 STATISTICAL LEARNING | 03-06-2026 10:30 - 12:30 | B102 [Edificio B - Dalmine]",
+      "html_hash": "ac34d141018e768e202239c004cfd037"
     },
     {
-      "raw": "🔹 INTELLIGENZA ARTIFICIALE | 25-05-2026 16:00 - 18:00 | A201 [Edificio A - Dalmine]",
-      "html_hash": "9e6c48a7137e0b9d3717c1ed73bec82a"
+      "raw": "❌ [ANNULLATA] GESTIONE AZIENDALE | 03-06-2026 10:30 - 13:30 | D002 [Edificio D - Dalmine]",
+      "html_hash": "ac75b3894bb325736b54aa200a2cac4b"
     },
     {
-      "raw": "🔹 GESTIONE AZIENDALE | 26-05-2026 08:30 - 10:30 | A002 [Edificio A - Dalmine]",
-      "html_hash": "9910e56de751ff255342c379311917f8"
+      "raw": "🔹 RETI DI TELECOMUNICAZIONE (principi e laboratorio) | 04-06-2026 08:30 - 10:30 | B102 [Edificio B - Dalmine]",
+      "html_hash": "45d986b0fda4d87b700baa61cc4b68a7"
     },
     {
-      "raw": "🔹 OPTIMIZATION | 26-05-2026 16:00 - 19:00 | B103 [Edificio B - Dalmine]",
-      "html_hash": "5c3b0e5c6af3f1b159bd671cb1f04880"
+      "raw": "🔹 INTELLIGENZA ARTIFICIALE | 04-06-2026 10:30 - 12:30 | B104 [Edificio B - Dalmine]",
+      "html_hash": "1b36827d83c81f6f09054ee37da5b0cc"
     },
     {
-      "raw": "🔹 STATISTICAL LEARNING | 27-05-2026 10:30 - 12:30 | B-106 [Edificio B - Dalmine]",
-      "html_hash": "da0e3f6b1cbe76294654c3f853dead71"
+      "raw": "🔹 TEORIA DELL'INFORMAZIONE E DELLA TRASMISSIONE (TIT) | 04-06-2026 14:00 - 18:00 | Lab. Galvani - piano1 [Laboratori - Dalmine]",
+      "html_hash": "bc861204c9bec00d496ef21896aa9c07"
     },
     {
-      "raw": "🔹 GESTIONE AZIENDALE | 27-05-2026 10:30 - 13:30 | D002 [Edificio D - Dalmine]",
-      "html_hash": "03bea67418c2f07076f6d6b301b4cc2a"
+      "raw": "🔹 RETI DI TELECOMUNICAZIONE (principi e laboratorio) | 05-06-2026 08:30 - 12:30 | A104 Lab [Edificio A - Dalmine]",
+      "html_hash": "cd01ae57fd414f9f3da99df2b1663d6a"
     },
     {
-      "raw": "🔹 RETI DI TELECOMUNICAZIONE (principi e laboratorio) | 28-05-2026 08:30 - 10:30 | B102 [Edificio B - Dalmine]",
-      "html_hash": "dc23b105502e2458b5d2cb97696ec4a8"
-    },
-    {
-      "raw": "🔹 INTELLIGENZA ARTIFICIALE | 28-05-2026 10:30 - 12:30 | B104 [Edificio B - Dalmine]",
-      "html_hash": "235c982542ca0502f9ebc07b3273f6cc"
-    },
-    {
-      "raw": "🔹 TEORIA DELL'INFORMAZIONE E DELLA TRASMISSIONE (TIT) | 28-05-2026 14:00 - 18:00 | Lab. Galvani - piano1 [Laboratori - Dalmine]",
-      "html_hash": "85eed26e53d7125338cbdd99608d2c9b"
-    },
-    {
-      "raw": "🔹 RETI DI TELECOMUNICAZIONE (principi e laboratorio) | 29-05-2026 08:30 - 12:30 | A104 Lab [Edificio A - Dalmine]",
-      "html_hash": "909a8f72454ad2b258c9139b90a4f367"
-    },
-    {
-      "raw": "🔹 STATISTICAL LEARNING | 29-05-2026 14:00 - 16:00 | B101 [Edificio B - Dalmine]",
-      "html_hash": "c6af238b6ec1e4f912778946ef2eade0"
+      "raw": "🔹 STATISTICAL LEARNING | 05-06-2026 14:00 - 16:00 | B101 [Edificio B - Dalmine]",
+      "html_hash": "861582adeccca350affc7003ce939d77"
     }
   ],
-  "fingerprint": "f952c6493b5ba6e7436d89ce1542b9f5e1473fc98883ceb93d02af2f9eabceb3",
-  "last_updated": "2026-05-27T07:43:23.204401"
+  "fingerprint": "ac7f13e1ca5ded7c90653f58424cf0bd6d75b6b250c2ebb17336f0a61e9bc20d",
+  "last_updated": "2026-06-01T12:35:46.630897"
 }
