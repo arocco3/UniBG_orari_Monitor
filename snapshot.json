@@ -1,34 +1,22 @@
 {
   "events": [
     {
-      "raw": "🔹 STATISTICAL LEARNING | 03-06-2026 10:30 - 12:30 | B102 [Edificio B - Dalmine]",
-      "html_hash": "ac34d141018e768e202239c004cfd037"
+      "raw": "🔹 INTELLIGENZA ARTIFICIALE | 08-06-2026 14:30 - 16:30 | B104 [Edificio B - Dalmine]",
+      "html_hash": "a50c277706c2074384eea19636f859dc"
     },
     {
-      "raw": "❌ [ANNULLATA] GESTIONE AZIENDALE | 03-06-2026 10:30 - 13:30 | D002 [Edificio D - Dalmine]",
-      "html_hash": "ac75b3894bb325736b54aa200a2cac4b"
+      "raw": "🔹 GESTIONE AZIENDALE | 09-06-2026 10:30 - 13:30 | A001 [Edificio A - Dalmine]",
+      "html_hash": "f4e413fdb4a13a3c26bc91dd6edf1c21"
     },
     {
-      "raw": "❌ [ANNULLATA] RETI DI TELECOMUNICAZIONE (principi e laboratorio) | 04-06-2026 08:30 - 10:30 | B102 [Edificio B - Dalmine]",
-      "html_hash": "a1edd478183f849810d880e9115cb7cd"
+      "raw": "🔹 OPTIMIZATION | 09-06-2026 14:30 - 16:30 | B002 [Edificio B - Dalmine]",
+      "html_hash": "bb878b91e024b39afb52bb02a4de74a3"
     },
     {
-      "raw": "🔹 INTELLIGENZA ARTIFICIALE | 04-06-2026 10:30 - 12:30 | B104 [Edificio B - Dalmine]",
-      "html_hash": "1b36827d83c81f6f09054ee37da5b0cc"
-    },
-    {
-      "raw": "🔹 TEORIA DELL'INFORMAZIONE E DELLA TRASMISSIONE (TIT) | 04-06-2026 14:00 - 18:00 | Lab. Galvani - piano1 [Laboratori - Dalmine]",
-      "html_hash": "bc861204c9bec00d496ef21896aa9c07"
-    },
-    {
-      "raw": "❌ [ANNULLATA] RETI DI TELECOMUNICAZIONE (principi e laboratorio) | 05-06-2026 08:30 - 12:30 | A104 Lab [Edificio A - Dalmine]",
-      "html_hash": "1cc10293d7f0f4c82239d7a8290a95d2"
-    },
-    {
-      "raw": "🔹 STATISTICAL LEARNING | 05-06-2026 14:00 - 16:00 | B101 [Edificio B - Dalmine]",
-      "html_hash": "861582adeccca350affc7003ce939d77"
+      "raw": "🔹 OPTIMIZATION | 09-06-2026 16:30 - 17:30 | B002 [Edificio B - Dalmine]",
+      "html_hash": "d005a214c745955dacb33b5fbceefdc5"
     }
   ],
-  "fingerprint": "9d43376b04542d10c4c8e0f17a68c1392aab823039902fefca203acd4a5b16c0",
-  "last_updated": "2026-06-03T11:55:44.380570"
+  "fingerprint": "850699356928648f4e2fbb266b88a94cc83c791dd5920531aa1a2d5235364e0b",
+  "last_updated": "2026-06-08T11:56:07.018234"
 }
