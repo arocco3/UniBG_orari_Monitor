@@ -1,22 +1,5 @@
 {
-  "events": [
-    {
-      "raw": "🔹 INTELLIGENZA ARTIFICIALE | 08-06-2026 14:30 - 16:30 | B104 [Edificio B - Dalmine]",
-      "html_hash": "a50c277706c2074384eea19636f859dc"
-    },
-    {
-      "raw": "🔹 GESTIONE AZIENDALE | 09-06-2026 10:30 - 13:30 | A001 [Edificio A - Dalmine]",
-      "html_hash": "f4e413fdb4a13a3c26bc91dd6edf1c21"
-    },
-    {
-      "raw": "🔹 OPTIMIZATION | 09-06-2026 14:30 - 16:30 | B002 [Edificio B - Dalmine]",
-      "html_hash": "bb878b91e024b39afb52bb02a4de74a3"
-    },
-    {
-      "raw": "🔹 OPTIMIZATION | 09-06-2026 16:30 - 17:30 | B002 [Edificio B - Dalmine]",
-      "html_hash": "d005a214c745955dacb33b5fbceefdc5"
-    }
-  ],
-  "fingerprint": "850699356928648f4e2fbb266b88a94cc83c791dd5920531aa1a2d5235364e0b",
-  "last_updated": "2026-06-08T11:56:07.018234"
+  "events": [],
+  "fingerprint": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "last_updated": "2026-06-15T13:11:43.291965"
 }
