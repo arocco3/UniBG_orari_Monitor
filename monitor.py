@@ -19,12 +19,10 @@ SNAPSHOT_FILE = "snapshot.json"
 
 # Corsi da monitorare (confronto case-insensitive, anche parziale)
 CORSI_INTERESSATI = [
-    "GESTIONE AZIENDALE",
-    "OPTIMIZATION",
-    "STATISTICAL LEARNING",
-    "INTELLIGENZA ARTIFICIALE",
-    "RETI DI TELECOMUNICAZIONE (principi e laboratorio)",
-    "TEORIA DELL'INFORMAZIONE E DELLA TRASMISSIONE (TIT)",
+    "ADAPTIVE LEARNING, ESTIMATION AND SUPERVISION OF DYNAMICAL SYSTEMS",
+    "ADVANCED DATA MANAGEMENT AND LABORATORY",
+    "STATISTICS FOR HIGH DIMENSIONAL DATA AND COMPSTAT LAB",
+    "LINGUAGGI FORMALI E COMPILATORI",
 ]
 
 # Endpoint API diretto
@@ -35,11 +33,11 @@ PAYLOAD = {
     "view": "easycourse",
     "form-type": "corso",
     "include": "corso",
-    "txtcurr": "1 - PERCORSO COMUNE",
-    "anno": "2025",
+    "txtcurr": "2 - PERCORSO COMUNE",
+    "anno": "2026",
     "scuola": "ScuoladiIngegneria",
     "corso": "38-270",
-    "anno2[]": "PDS0-2012|1",
+    "anno2[]": "PDS0-2012|2",
     "visualizzazione_orario": "cal",
     "date": datetime.now().strftime("%d-%m-%Y"), # ATTENZIONE: Questo parametro potrebbe definire la settimana specifica.
     "periodo_didattico": "",
