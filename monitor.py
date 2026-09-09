@@ -40,7 +40,7 @@ PAYLOAD = {
     "anno2[]": "PDS0-2012|2",
     "visualizzazione_orario": "cal",
     "date": datetime.now().strftime("%d-%m-%Y"), # ATTENZIONE: Questo parametro potrebbe definire la settimana specifica.
-    "periodo_didattico": "",
+    "periodo_didattico": "S1",
     "_lang": "it",
     "list": "",
     "week_grid_type": "-1",
