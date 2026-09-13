@@ -81,6 +81,18 @@ def fetch_schedule() -> list[dict]:
     # Se 'celle' non esiste o è vuoto, restituisce una lista vuota
     celle = data.get("celle", [])
 
+
+
+    print(f"  → celle totali ricevute: {len(celle)}")
+    if celle:
+        print(f"  → primo corso: {celle[0].get('nome_insegnamento', 'N/A')}")
+    else:
+        print(f"  → risposta raw: {resp.text[:500]}")
+
+
+
+
+
     for cella in celle:
         nome_corso = cella.get("nome_insegnamento", "Sconosciuto")
         
