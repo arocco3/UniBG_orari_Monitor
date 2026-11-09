@@ -1,42 +1,42 @@
 {
   "events": [
     {
-      "raw": "🔹 LINGUAGGI FORMALI E COMPILATORI | 02-11-2026 10:30 - 13:30 | B-106 [Edificio B - Dalmine]",
-      "html_hash": "938917109093e1a9df44fabb1c080ba4"
+      "raw": "🔹 LINGUAGGI FORMALI E COMPILATORI | 09-11-2026 10:30 - 13:30 | B-106 [Edificio B - Dalmine]",
+      "html_hash": "99dfa5c5f8506fef603b2cb36a5f0eb9"
     },
     {
-      "raw": "🔹 ADVANCED DATA MANAGEMENT AND LABORATORY | 03-11-2026 08:30 - 10:30 | B-104 [Edificio B - Dalmine]",
-      "html_hash": "31b0c25e239116732af67d065f41975d"
+      "raw": "🔹 ADVANCED DATA MANAGEMENT AND LABORATORY | 10-11-2026 08:30 - 10:30 | B-104 [Edificio B - Dalmine]",
+      "html_hash": "bfdd3785f60ff731592db115e7adcbf7"
     },
     {
-      "raw": "🔹 STATISTICS FOR HIGH DIMENSIONAL DATA AND COMPSTAT LAB | 03-11-2026 10:30 - 12:30 | B-106 [Edificio B - Dalmine]",
-      "html_hash": "455b5949bdd9a4601a2439b9f03d8e2d"
+      "raw": "🔹 STATISTICS FOR HIGH DIMENSIONAL DATA AND COMPSTAT LAB | 10-11-2026 10:30 - 12:30 | B-106 [Edificio B - Dalmine]",
+      "html_hash": "171ba0cd315e679410d2ee139cdc46ff"
     },
     {
-      "raw": "🔹 STATISTICS FOR HIGH DIMENSIONAL DATA AND COMPSTAT LAB | 04-11-2026 11:30 - 13:30 | A003 [Edificio A - Dalmine]",
-      "html_hash": "ccbf0179a3c8829f67f3d6e4db0e10e5"
+      "raw": "🔹 STATISTICS FOR HIGH DIMENSIONAL DATA AND COMPSTAT LAB | 11-11-2026 11:30 - 13:30 | A102 [Edificio A - Dalmine]",
+      "html_hash": "e5183265db2bd0221f119630832b3b23"
     },
     {
-      "raw": "🔹 ADVANCED DATA MANAGEMENT AND LABORATORY | 04-11-2026 16:00 - 19:00 | B-104 [Edificio B - Dalmine]",
-      "html_hash": "4d635ede1df6f6b5d03ca24b78ea7fde"
+      "raw": "🔹 ADVANCED DATA MANAGEMENT AND LABORATORY | 11-11-2026 16:00 - 19:00 | B-104 [Edificio B - Dalmine]",
+      "html_hash": "45e4747dcdc677d985ecdadb25cf600f"
     },
     {
-      "raw": "🔹 ADAPTIVE LEARNING, ESTIMATION AND SUPERVISION OF DYNAMICAL SYSTEMS | 05-11-2026 14:00 - 17:00 | B-106 [Edificio B - Dalmine]",
-      "html_hash": "ff8a13509c03d0d039fb944a690800c1"
+      "raw": "🔹 ADAPTIVE LEARNING, ESTIMATION AND SUPERVISION OF DYNAMICAL SYSTEMS | 12-11-2026 14:00 - 17:00 | B-106 [Edificio B - Dalmine]",
+      "html_hash": "30c37055172f21618b81bcd08cea378e"
     },
     {
-      "raw": "🔹 ADAPTIVE LEARNING, ESTIMATION AND SUPERVISION OF DYNAMICAL SYSTEMS | 06-11-2026 08:30 - 10:30 | B-106 [Edificio B - Dalmine]",
-      "html_hash": "6f4dacaa847e238875e0d1db011b6226"
+      "raw": "🔹 ADAPTIVE LEARNING, ESTIMATION AND SUPERVISION OF DYNAMICAL SYSTEMS | 13-11-2026 08:30 - 10:30 | B-106 [Edificio B - Dalmine]",
+      "html_hash": "88c08c6fe7f94e573a7c979b93d3f881"
     },
     {
-      "raw": "🔹 ADVANCED DATA MANAGEMENT AND LABORATORY | 06-11-2026 10:30 - 13:30 | B-106 [Edificio B - Dalmine]",
-      "html_hash": "5b2f20304b833caf346d117e7db0215c"
+      "raw": "🔹 ADVANCED DATA MANAGEMENT AND LABORATORY | 13-11-2026 10:30 - 13:30 | B-106 [Edificio B - Dalmine]",
+      "html_hash": "d76c17063dc8f8120269021100254b31"
     },
     {
-      "raw": "🔹 LINGUAGGI FORMALI E COMPILATORI | 06-11-2026 14:30 - 17:30 | B-106 [Edificio B - Dalmine]",
-      "html_hash": "d9503bfe27fd0c3e127fb6d8a0514fca"
+      "raw": "🔹 LINGUAGGI FORMALI E COMPILATORI | 13-11-2026 14:30 - 18:30 | B-106 [Edificio B - Dalmine]",
+      "html_hash": "d77569caa389d315cb6506e79389386f"
     }
   ],
-  "fingerprint": "a69935ea4a3dfd779a0496592995cd0f1cb22e91b732b74bcd4814c87db3bdc8",
-  "last_updated": "2026-11-02T16:49:35.512984"
+  "fingerprint": "cfbbf23fa160c7629ab6a7285bc92f1a3b7be72723617798e0ba1dfaac866a40",
+  "last_updated": "2026-11-09T17:10:35.726736"
 }
